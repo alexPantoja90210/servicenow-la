@@ -25,3 +25,12 @@ Add one entry per day. Keep it short: what was done, what was unexpected, what t
 * Test with Impersonate User: the agent sees the incident list (41 active incidents); `lab.d2.nobody` sees an empty list ("No records to display"), with no access-denied message.
 * Identity type matters: the users were first created with Identity type set to AI, which cannot be edited afterwards and kept them out of the impersonation search. They had to be deleted and recreated as Human. Set Identity type to Human when creating people.
 * Test user emails use `@example.com` so that notifications on day 7 cannot reach real mailboxes.
+
+## Day 3 - Tables and fields
+
+* Created the update set `LAB SN - Build` and made it current before building, so configuration changes are captured for the update set export planned for day 10. Data records (users, incidents, table rows) are not captured by update sets.
+* Added a String field `LAB D3 Note` (`u_lab_d3_note`) to the incident form. It saves text. The update set captured two entries for it: Field Label and Dictionary.
+* Created a custom table `LAB D3 Equipment` (`u_lab_d3_equipment`) and added 3 records: `LAB D3 - laptop 1`, `LAB D3 - laptop 2` and `LAB D3 - Monitor 1`. The list is labeled "LAB D3 Equipments" because the platform adds a plural "s" to the label.
+* A demo incident (`INC0009009`) still loads and shows the new field, empty.
+* Form Layout did not respond at first and worked later. Form Builder and Form Design are also available under Configure on the incident form.
+* New columns and tables get the `u_` prefix automatically.
