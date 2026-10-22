@@ -15,3 +15,4 @@ Add one entry per day. Keep it short: what was done, what was unexpected, what t
 * No demo data was modified or deleted.
 * The instance felt slow. Worth tracking on later days to see whether it is the first-load time or a constant.
 * The web interface felt better than the Windows client used before.
+* The All menu has far more applications and modules than expected. The navigator filter and favorites make it manageable; each day only needs a small area of it.
