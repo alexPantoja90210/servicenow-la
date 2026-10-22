@@ -34,3 +34,4 @@ Add one entry per day. Keep it short: what was done, what was unexpected, what t
 * A demo incident (`INC0009009`) still loads and shows the new field, empty.
 * Form Layout did not respond at first and worked later. Form Builder and Form Design are also available under Configure on the incident form.
 * New columns and tables get the `u_` prefix automatically.
+* The table has three columns: `Name`, `Serial Number` and `Purchase date`. The update set `LAB SN - Build` holds 13 entries for the day 3 work (filter: target name contains `LAB D3`): the incident field (Field Label, Dictionary), the table (Table, Dictionary, Form Layout, Field Labels), the application menu and the modules.
