@@ -45,3 +45,15 @@ Add one entry per day. Keep it short: what was done, what was unexpected, what t
 * Once an incident is Closed, the record becomes read-only.
 * The activity stream records every field change with its time and the user. It shows one work note (`Checking the printer`); the resolution reason is in the Resolution notes. Closing has no note of its own. Next time, add a work note at each state change so every transition has its reason.
 * The incident was assigned to the group `LAB D2 - Service Desk` and to the agent `Lab Agent`, which reuses the users and the group built on day 2.
+
+## Day 5 - Catalog item with variables and approval
+
+* Built the catalog item `LAB D5 - Request a monitor` (variables `Monitor size` and `Justification`) and the flow `LAB D5 - Monitor approval`. The item is linked to the flow in the item's Process Engine > Flow field. The Service Catalog trigger has no item field, so the link is not made in the flow.
+* Approve path: the request reaches the approver (My Approvals / Approvers tab on the RITM). Approving moved RITM0010002 and RITM0010005 to Work in Progress.
+* Reject path: with only an `Approve when Anyone approves` rule, a rejection by the sole approver ended with Approval State `cancelled`, not `rejected`. Both Ifs evaluated False and the RITM stayed Open (RITM0010003, RITM0010006). Adding a second rule set (`Reject when Anyone rejects`) fixed it: RITM0010007 moved to Closed Incomplete by the system seconds after the rejection.
+* Nothing reached fulfillment without an approval: every RITM stayed Open until the approval was decided.
+* The RITM Stage field showed Request Approved before any approval, so it is not a reliable indicator here. Use State and the approval record.
+* Flow Context / Execution Details (inputs, outputs, Not Run steps) is the fastest way to debug a flow. Flow Reporting at Full is for debugging only.
+* A flow that is made Inactive needs the Edit flow button before Save and Activate appear.
+* `Monitor size` only showed the 27" choice; the second choice is missing in Question Choices (to fix).
+* Next time: change one thing in the flow at a time and confirm it before testing again. Test both the approve and the reject path from the start.
