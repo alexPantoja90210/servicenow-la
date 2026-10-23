@@ -44,3 +44,4 @@ Add one entry per day. Keep it short: what was done, what was unexpected, what t
 * Setting the state to Resolved makes Resolution code and Resolution notes mandatory, so an incident cannot be resolved without them. Closing follows from Resolved.
 * Once an incident is Closed, the record becomes read-only.
 * The activity stream records every field change with its time and the user. It shows one work note (`Checking the printer`); the resolution reason is in the Resolution notes. Closing has no note of its own. Next time, add a work note at each state change so every transition has its reason.
+* The incident was assigned to the group `LAB D2 - Service Desk` and to the agent `Lab Agent`, which reuses the users and the group built on day 2.
