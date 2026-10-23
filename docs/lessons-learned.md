@@ -57,3 +57,16 @@ Add one entry per day. Keep it short: what was done, what was unexpected, what t
 * A flow that is made Inactive needs the Edit flow button before Save and Activate appear.
 * `Monitor size` only showed the 27" choice; the second choice is missing in Question Choices (to fix).
 * Next time: change one thing in the flow at a time and confirm it before testing again. Test both the approve and the reject path from the start.
+
+## Day 6 - Change, problem and knowledge base
+
+* Created problem `PRB0040001` (`LAB D6 - Printer queue keeps stalling`) and normal change `CHG0030001` (`LAB D6 - Restart print spooler service`). The change is linked to the problem in the change's `Problems (1)` tab.
+* Created knowledge article `KB0010001` (`LAB D6 - How to restart the print spooler`) in the `IT` knowledge base. It started as a draft (v0.01).
+* Publish does not publish directly: the `IT` base uses the publish flow `Knowledge - Approval Publish`, so the article went to In review and needed an approval. The base owner is a demo-data user, not the admin; the admin approved it manually. After approval it became v1.0, Published, valid to 2100-01-01.
+* Draft visibility: `lab.d2.nobody` did not find the draft, but that proves little, because it also did not find the published article.
+* Why: the `IT` base `Can Read` list had only demo-data user criteria (a problem-solving group, all ACME North America employees, all ACME Corporation employees). Neither lab user matched any of them, so neither could read anything in the base. Admin could see the draft in search.
+* Fix: created the user criteria `LAB D6 - Service Desk readers` (group `LAB D2 - Service Desk`) and added it to the `IT` base `Can Read` (now 4 entries). Then `lab.d2.agent` found `KB0010001` (published) and got 0 results for `KB0010002` (left as a draft). That is the real proof that a draft is hidden from a user who can read the base.
+* Navigation: opening an article from the search shows the Knowledge Portal view, which has no edit buttons; use the Knowledge application list to get the form. The `Knowledge Bases` entry under `Now Mobile App` is a different thing. From the article form, the (i) icon next to `Knowledge base` leads to the base record and its `Can Read` / `Can Contribute` tabs.
+* The instance is slow and gives no visual feedback on clicks; one click and wait.
+* Cleanup list for day 12: `PRB0040001`, `CHG0030001`, `KB0010001`, `KB0010002`, user criteria `LAB D6 - Service Desk readers` and its entry in the `IT` base `Can Read`.
+* Next time: before testing visibility with a user, check that the user can read the base at all; otherwise a "not visible" result proves nothing.
