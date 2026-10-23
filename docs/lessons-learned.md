@@ -35,3 +35,12 @@ Add one entry per day. Keep it short: what was done, what was unexpected, what t
 * Form Layout did not respond at first and worked later. Form Builder and Form Design are also available under Configure on the incident form.
 * New columns and tables get the `u_` prefix automatically.
 * The table has three columns: `Name`, `Serial Number` and `Purchase date`. The update set `LAB SN - Build` holds 13 entries for the day 3 work (filter: target name contains `LAB D3`): the incident field (Field Label, Dictionary), the table (Table, Dictionary, Form Layout, Field Labels), the application menu and the modules.
+
+## Day 4 - Incident management end to end
+
+* Ran one incident (`INC0010004`, "LAB D4 - Printer not working") through the full lifecycle: New, In Progress, Resolved, Closed. States were never skipped.
+* Priority is calculated from Impact and Urgency (Impact 2 - Medium gave Priority 3 - Moderate).
+* Assigning the incident to `Lab Agent` moved the state from New to In Progress automatically.
+* Setting the state to Resolved makes Resolution code and Resolution notes mandatory, so an incident cannot be resolved without them. Closing follows from Resolved.
+* Once an incident is Closed, the record becomes read-only.
+* The activity stream records every field change with its time and the user. It shows one work note (`Checking the printer`); the resolution reason is in the Resolution notes. Closing has no note of its own. Next time, add a work note at each state change so every transition has its reason.
