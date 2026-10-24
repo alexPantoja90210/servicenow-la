@@ -84,3 +84,14 @@ Add one entry per day. Keep it short: what was done, what was unexpected, what t
 * Notification Preview (with a demo incident) shows the subject, body and recipients without sending anything; useful to check a template.
 * Cleanup list for day 12: notification `LAB D7 - Incident assigned`, incident INC0010005.
 * Next time: after creating a record, check the fields that are pre-filled by default, not only the ones you set.
+
+## Day 8 - Flow Designer: flow on incident creation
+
+* Built the flow `LAB D8 - Network incident note`: trigger Created on the incident table with the condition `Category is Network`, and one Update Record action on the trigger record that adds a work note.
+* Matching case: INC0010006 (category Network) got the work note about 15 seconds after creation. Execution list: one execution of the flow, state Complete, created by admin, about 6 seconds after the incident was created.
+* Non-matching case: INC0010007 (category Software) got no work note and produced no execution (the execution list shows exactly one).
+* The `Run Trigger` (once / for each unique change) option does not exist for a Created trigger; it only applies to Updated triggers. A Created trigger runs once per record.
+* The work note text `${number}` was written literally into the note: Flow Designer does not use `${...}` in text fields. To insert a field value, drag the data pill from the data panel (Trigger - Record > Incident Record > Number) instead of typing it.
+* Evidence of a flow run: the work note on the record (activity stream) and the execution record in Operations > Executions.
+* Cleanup list for day 12: flow `LAB D8 - Network incident note`, incidents INC0010006 and INC0010007.
+* Next time: test the non-matching case in the same session as the matching one; it proves the condition, not only that the flow works.
