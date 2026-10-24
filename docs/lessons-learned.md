@@ -95,3 +95,18 @@ Add one entry per day. Keep it short: what was done, what was unexpected, what t
 * Evidence of a flow run: the work note on the record (activity stream) and the execution record in Operations > Executions.
 * Cleanup list for day 12: flow `LAB D8 - Network incident note`, incidents INC0010006, INC0010007 and INC0010008.
 * Next time: test the non-matching case in the same session as the matching one; it proves the condition, not only that the flow works.
+
+## Day 9 - Reports and incident dashboard
+
+* Created three extra incidents with different priority and state so the chart has variety: INC0010011 (1 - Critical, In Progress), INC0010012 (3 - Moderate, In Progress, assigned to `lab.d2.agent`), INC0010013 (5 - Planning, New).
+* Built the dashboard `LAB D9 - Incident overview` (Platform Analytics, Next Experience) with one data visualization titled `LAB D9 - Incidents by priority and state`: type Vertical bar, data source `Incident [incident]`, metric Count, group by Priority, additional group by State.
+* Without a filter the chart counted about 75 incidents, including demo data. After adding the data source filter `Created > 2026-10-21 00:00:00` (the PDI creation date) the preview list showed 9 of 9 records, all created in this lab (INC0010003 to INC0010008 and INC0010011 to INC0010013), so the report does not depend on demo data that a PDI reset would delete.
+* The chart matched the records: Planning 3 (all New), Moderate 3 (New, In Progress, Closed), Critical 2 (In Progress), High 1 (In Progress), total 9.
+* After Save, Exit editing mode and a reload, the dashboard is listed under Dashboards (active, owned by System Administrator) and shows the same chart.
+* In the Platform Analytics editor the data source must be connected first; the Group by and additional group by options only load afterwards (the panel showed spinners for a while). The panel sections are collapsed by default: Header and border, Data, Presentation, Chart interaction. The data source filter is edited from the source card menu.
+* The visualization type list is long and grouped (Time series, Scores, Bars, Pie and donuts, Multidimensional charts, Other); bar charts are under Bars.
+* The `On-Call Scheduling > Reports` menu entry is unrelated to incidents.
+* The instance is very slow on analytics screens: one click and wait up to a minute.
+* Limitation: the chart was built as a visualization inside the dashboard; no separate classic report record was created. To check on day 10: whether the dashboard and visualization are captured in update set `LAB SN - Build`.
+* Cleanup list for day 12: dashboard `LAB D9 - Incident overview`, incidents INC0010011, INC0010012 and INC0010013.
+* Next time: check the totals of a chart against the list it is built from before trusting it; the first chart looked right but included demo data.
