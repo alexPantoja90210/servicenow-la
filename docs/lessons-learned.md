@@ -70,3 +70,17 @@ Add one entry per day. Keep it short: what was done, what was unexpected, what t
 * The instance is slow and gives no visual feedback on clicks; one click and wait.
 * Cleanup list for day 12: `PRB0040001`, `CHG0030001`, `KB0010001`, `KB0010002`, user criteria `LAB D6 - Service Desk readers` and its entry in the `IT` base `Can Read`.
 * Next time: before testing visibility with a user, check that the user can read the base at all; otherwise a "not visible" result proves nothing.
+
+## Day 7 - Notifications and events
+
+* Created the notification `LAB D7 - Incident assigned` on the incident table: Send when `Record inserted or updated` with Inserted and Updated both checked. Recipients: `Assigned to` and `Caller` (Users/Groups in fields). Subject `LAB D7 - Incident assigned: ${number}`.
+* The visual Conditions builder has no `changes` operator for `Assigned to` (the `is` operator expects a person). Firing only on assignment needs the Advanced condition script, shown after saving through the `Advanced view` related link: `answer = current.assigned_to.changes() && !current.assigned_to.nil();`. The script must set the `answer` variable; a bare expression does not work.
+* Saving with no Inserted or Updated checkbox is refused ("Select a value for Insert or Update before submitting").
+* The new notification had `System Administrator` pre-filled in the Users field, which would have notified a user who is neither assignee nor caller. Check the Users field and clear it.
+* Saving the form twice created a duplicate notification with the same name; only one is needed (the one with both Inserted and Updated checked).
+* Test: INC0010005 (caller `lab.d2.nobody`, assigned to `lab.d2.agent`) produced exactly one email in System Logs > Emails, subject `LAB D7 - Incident assigned: INC0010005`, recipients `lab.d2.agent@example.com` and `lab.d2.nobody@example.com`, type `send-ready`, notification type SMTP.
+* Negative test: a work note on the same incident without changing `Assigned to` produced no new email.
+* PDI limitation: the email is generated and left `send-ready` in the log; it is not delivered to a real mailbox (the addresses are @example.com). Verification is through the email log only.
+* Notification Preview (with a demo incident) shows the subject, body and recipients without sending anything; useful to check a template.
+* Cleanup list for day 12: notification `LAB D7 - Incident assigned`, incident INC0010005.
+* Next time: after creating a record, check the fields that are pre-filled by default, not only the ones you set.
