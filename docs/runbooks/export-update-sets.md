@@ -5,7 +5,7 @@ Goal: keep the configuration built in the PDI as files in the repo, so it can be
 ## Export
 
 1. Open the update set (Local Update Sets) and check its contents in Customer Updates. Group by Type; do not rely on name prefixes, some entries have an empty target name.
-2. Remove entries that are not from the lab (for example system records the platform captured by side effect).
+2. Sort by Created (newest first) and remove entries that are not from the lab (for example system records captured by side effect, such as an ECC queue authorization policy after creating a table, or the form layout of a log table after opening it). Removing an entry from the set does not undo anything in the instance.
 3. Set State to Complete and click Update. The `Export Update Set` related link only appears in this state.
 4. Click `Export Update Set` and save the XML in `update-sets/` with a date in the name.
 5. Set State back to In progress and select the set again as the current update set (globe icon, top right).
@@ -19,6 +19,10 @@ Goal: keep the configuration built in the PDI as files in the repo, so it can be
 3. Read the counters and the preview problems before committing: Inserted, Updated, Deleted, Collisions, Total. Total must match the exported entry count.
 4. Click Commit Update Set. Open the commit log and read every Error line.
 5. Check the result in the instance (open the main objects).
+
+## Notes
+
+* Committing a retrieved set creates a local update set with the same name in state Complete. Keep working and exporting from the one In progress.
 
 ## Known limits
 
