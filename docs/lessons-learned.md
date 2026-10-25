@@ -110,3 +110,16 @@ Add one entry per day. Keep it short: what was done, what was unexpected, what t
 * Limitation: the chart was built as a visualization inside the dashboard; no separate classic report record was created. To check on day 10: whether the dashboard and visualization are captured in update set `LAB SN - Build`.
 * Cleanup list for day 12: dashboard `LAB D9 - Incident overview`, incidents INC0010011, INC0010012 and INC0010013.
 * Next time: check the totals of a chart against the list it is built from before trusting it; the first chart looked right but included demo data.
+
+## Day 10 - Update sets: capture, export, import
+
+* Exported `LAB SN - Build` (days 3 to 9) to `update-sets/lab-sn-build-2026-10-24.xml`: 47 entries, about 260 KB. The `Export Update Set` related link only appears when the set state is Complete; after exporting, the state was set back to In progress and the set was selected again as the current update set so day 11 keeps being captured.
+* Scan of the XML for password, secret, token, API key, bearer, private key, credential and the instance name: no matches. Nothing sensitive was committed.
+* Contents: day 3 table, fields, role, 4 ACLs, menu and module, and the incident field; day 5 catalog item, category, 2 variables, both question choices (24" and 27") and the flow; day 6 user criteria and its Can Read entry for the IT knowledge base; day 7 notification (one insert-or-update and one delete entry, the deleted duplicate); day 8 flow; day 9 dashboard.
+* The dashboard is captured as 7 `PAR Dashboard` entries with an empty target name, so filtering the list by `LAB D9` shows 0. Counting entries by name prefix can understate what a set contains; group by type instead.
+* Not in the set: users, the group `LAB D2 - Service Desk`, incidents, and the problem, change and knowledge article records (data, or created before the set). The IT knowledge base criteria points to that group, so a rebuild on a new instance must recreate the group first.
+* One entry was not from the lab: an `ECC Queue Authorization Policy`. It is a system record and the platform refused to change it on commit ("result change rejected ... security_admin=false"). Remove that entry from the set before the final export on day 12 (removing an entry from a set does not undo anything in the instance).
+* Import: the file was uploaded twice by mistake, which created two retrieved update sets with 47 entries each; the older one was deleted. Preview: Inserted 0, Updated 46, Deleted 1, Collisions 0, Total 47. Before committing, the XML showed the one delete entry points to the deleted duplicate notification, not to the live one.
+* Commit finished as Committed with one error in the log, the ECC policy above; the other 46 entries were applied. After the commit, the monitor size choices (24" and 27") and the day 9 dashboard still worked.
+* Limitation: importing back into the same instance proves the file is valid and complete (every entry already existed, so nothing was inserted); it is not a real rebuild, which would need a fresh instance.
+* Next time: upload the XML once, and read the preview counters before committing.
